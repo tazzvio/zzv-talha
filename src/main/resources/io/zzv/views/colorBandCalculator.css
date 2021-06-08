@@ -1,0 +1,40 @@
+.mainbox {
+  -fx-spacing: 5px;
+  -fx-padding: 20 6 20 6;
+  -fx-alignment: top-center;
+  -fx-background-color: -primary-swatch-100;
+}
+
+.bandName {
+  -fx-font-size: 1.1em;
+  -fx-padding: 2;
+}
+
+.resistor {
+   -fx-alignment: top-center;
+}
+
+.result {
+  -fx-text-fill: -primary-swatch-800;
+  -fx-font-size: 1.2em;
+  -fx-font-weight: bold;
+  -fx-padding: 10 0 0 0;
+}
+
+.result:error {
+  -fx-text-fill: red;
+}
+
+.colorbox {
+  -fx-alignment: center-left;
+}
+
+.colorButton {
+  -fx-font-size: 0px;
+  -fx-border-width: 0px;
+}
+
+.colorButton:selected {
+  -fx-border-width: 3px;
+  -fx-border-color: black white;
+}

@@ -1,0 +1,52 @@
+name: iOS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Gluon's GraalVM
+        uses: gluonhq/setup-graalvm@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: Apple-Actions/import-codesign-certs@v1
+        with:
+          p12-file-base64: ${{ secrets.GLUON_IOS_CERTIFICATES_FILE_BASE64 }}
+          p12-password: ${{ secrets.GLUON_IOS_CERTIFICATES_PASSWORD }}
+
+      - uses: Apple-Actions/download-provisioning-profiles@v1
+        with:
+          bundle-id: io.zzv.view
+          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
+
+      - name: Gluon Build
+        run: mvn -Pios -DskipIOSSigning=true client:build
+
+      - name: Gluon Package
+        run: mvn -Pios -DskipIOSSigning=true client:package
+
+      - name: Copy native clients to staging
+        run: cp -r target/client/arm64-ios/Zzv-view.ipa staging
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: staging
+
+
+      - uses: Apple-Actions/upload-testflight-build@master
+        with:
+          app-path: target/client/arm64-ios/Zzv-view.ipa
+          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
+

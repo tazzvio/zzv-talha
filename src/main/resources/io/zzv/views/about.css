@@ -1,0 +1,20 @@
+.mainbox {
+  -fx-spacing: 10px;
+  -fx-padding: 20 6 20 6;
+  -fx-alignment: top-center;
+  -fx-background-color: -primary-swatch-100;
+}
+
+.about {
+  -fx-text-fill: -primary-swatch-800;
+  -fx-font-size: 1em;
+  -fx-font-weight: bold;
+  -fx-padding: 10 0 0 0;
+}
+
+.button {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-min-height: 40px; -fx-max-height: 40px;
+  -fx-min-width: 160px; -fx-max-width: 160px;
+}
