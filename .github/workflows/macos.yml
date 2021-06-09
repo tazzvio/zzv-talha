@@ -48,6 +48,7 @@ jobs:
       - uses: Apple-Actions/upload-testflight-build@master
         with:
           app-path: target/client/x86_64-darwin/Zzv-view
+          app-type: osx
           issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
