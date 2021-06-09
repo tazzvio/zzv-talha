@@ -37,7 +37,7 @@ jobs:
         run: mkdir staging
 
       - name: Copy native clients to staging
-        run: cp -r target/client/aarch64-android/gvm/*.apk staging
+        run: cp -r target/client/aarch64-android/gvm/Zzv-view.apk staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
@@ -46,10 +46,10 @@ jobs:
           path: staging
 
 
-      # - name: Upload to Google Play
-      #   uses: r0adkll/upload-google-play@v1
-      #   with:
-      #     serviceAccountJsonPlainText: ${{ secrets.GLUON_ANDROID_SERVICE_ACCOUNT_JSON }}
-      #     packageName: com.gluonhq.samples.hellogluon
-      #     releaseFiles: target/client/aarch64-android/gvm/HelloGluon.apk
-      #     track: beta
+      - name: Upload to Google Play
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GLUON_ANDROID_SERVICE_ACCOUNT_JSON }}
+          packageName: io.zzvv.view
+          releaseFiles: target/client/aarch64-android/gvm/Zzv-view.apk
+          track: beta
