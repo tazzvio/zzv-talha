@@ -43,10 +43,12 @@ jobs:
       #     path: staging
 
       - name: Upload to Mac store
+        env: 
+          PRIV_KEY: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
         run: |          
           cd src/osx
           mkdir -p private_keys
-          echo ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }} > private_keys/AuthKey_7QW2J46UP9.p8
+          echo $PRIV_KEY > private_keys/AuthKey_7QW2J46UP9.p8
           codesign -s ${{ secrets.GLUON_MACOS_APP_CERT_NAME }} -f --entitlements entitlement.plist zzv.app
           xcrun productbuild --component zzv.app /Applications --sign ${{ secrets.GLUON_MACOS_INSTALLER_CERT_NAME }} zzv.pkg
           xcrun altool --upload-app --file zzv.pkg --type osx --apiKey ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
