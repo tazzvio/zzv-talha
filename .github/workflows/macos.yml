@@ -17,35 +17,33 @@ jobs:
 
       - uses: Apple-Actions/import-codesign-certs@v1
         with:
+          keychain: MACOS_APP_CERT_KEYCHAIN
           p12-file-base64: ${{ secrets.GLUON_MACOS_APP_CERT_FILE_BASE64 }}
           p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
       - uses: Apple-Actions/import-codesign-certs@v1
         with:
+          keychain: MACOS_INSTALLER_CERT_KEYCHAIN
           p12-file-base64: ${{ secrets.GLUON_MACOS_INSTALLER_CERT_FILE_BASE64 }}
           p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
-      - name: Make staging directory
-        run: mkdir staging
+      # - name: Make staging directory
+      #   run: mkdir staging
 
-      - name: Gluon Build
-        run: mvn -Pdesktop client:build client:package
+      # - name: Gluon Build
+      #   run: mvn -Pdesktop client:build client:package
 
-      - name: Copy native client to staging
-        run: cp -r target/client/x86_64-darwin/Zzv-view* staging
+      # - name: Copy native client to staging
+      #   run: cp -r target/client/x86_64-darwin/Zzv-view* staging
 
-      - name: Upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: Package
-          path: staging
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Upload
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Package
+      #     path: staging
 
       - name: Upload to Mac store
-        run: |
-          cp target/client/x86_64-darwin/Zzv-view src/osx/zzv.app/Contents/MacOS/
+        run: |          
           cd src/osx
           mkdir -p private_keys
           echo ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }} > private_keys/AuthKey_7QW2J46UP9.p8
