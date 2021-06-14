@@ -17,15 +17,13 @@ jobs:
 
       - uses: Apple-Actions/import-codesign-certs@v1
         with:
-          p12-file-base64: ${{ secrets.GLUON_MACOS_CERTIFICATES_FILE_BASE64 }}
-          p12-password: ${{ secrets.GLUON_IOS_CERTIFICATES_PASSWORD }}
+          p12-file-base64: ${{ secrets.GLUON_MACOS_APP_CERT_FILE_BASE64 }}
+          p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
-      - uses: Apple-Actions/download-provisioning-profiles@v1
+      - uses: Apple-Actions/import-codesign-certs@v1
         with:
-          bundle-id: io.zzv.view
-          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
-          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
+          p12-file-base64: ${{ secrets.GLUON_MACOS_INSTALLER_CERT_FILE_BASE64 }}
+          p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
       - name: Make staging directory
         run: mkdir staging
@@ -45,11 +43,12 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
 
-      - uses: Apple-Actions/upload-testflight-build@master
-        with:
-          app-path: target/client/x86_64-darwin/Zzv-view
-          app-type: osx
-          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
-          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
-
+      - name: Upload to Mac store
+        run: |
+          cp target/client/x86_64-darwin/Zzv-view src/osx/zzv.app/Contents/MacOS/
+          cd src/osx
+          mkdir -p private_keys
+          echo ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }} > private_keys/AuthKey_7QW2J46UP9.p8
+          codesign -s ${{ secrets.GLUON_MACOS_APP_CERT_NAME }} -f --entitlements entitlement.plist zzv.app
+          xcrun productbuild --component zzv.app /Applications --sign ${{ secrets.GLUON_MACOS_INSTALLER_CERT_NAME }} zzv.pkg
+          xcrun altool --upload-app --file zzv.pkg --type osx --apiKey ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }} --apiIssuer ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
