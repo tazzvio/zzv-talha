@@ -21,11 +21,11 @@ jobs:
           p12-file-base64: ${{ secrets.GLUON_MACOS_APP_CERT_FILE_BASE64 }}
           p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
-      - uses: Apple-Actions/import-codesign-certs@v1
-        with:
-          keychain: MACOS_INSTALLER_CERT_KEYCHAIN
-          p12-file-base64: ${{ secrets.GLUON_MACOS_INSTALLER_CERT_FILE_BASE64 }}
-          p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
+      # - uses: Apple-Actions/import-codesign-certs@v1
+      #   with:
+      #     keychain: MACOS_INSTALLER_CERT_KEYCHAIN
+      #     p12-file-base64: ${{ secrets.GLUON_MACOS_INSTALLER_CERT_FILE_BASE64 }}
+      #     p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
       # - name: Make staging directory
       #   run: mkdir staging
@@ -51,5 +51,5 @@ jobs:
           APPSTORE_ISSUER_ID: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
         run: bash -x osx.sh
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
