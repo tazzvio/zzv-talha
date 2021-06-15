@@ -22,9 +22,9 @@
   </array>
   <key>com.apple.security.app-sandbox</key>
   <true/>
-  <key>CFBundleIconName</key>
-  <string>AppIcon</string>
   <key>LSMinimumSystemVersion</key>
   <string>10.4.1</string>
+  <key>CFBundleIconName</key>
+  <string>AppIcon</string>
 </dict>
 </plist>
