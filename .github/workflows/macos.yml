@@ -38,6 +38,8 @@ jobs:
           p12-file-base64: ${{ secrets.GLUON_MACOS_INSTALLER_CERT_FILE_BASE64 }}
           p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Upload to Mac store
         env: 
@@ -46,6 +48,3 @@ jobs:
           APPSTORE_KEY_ID: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
           APPSTORE_ISSUER_ID: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
         run: bash -x src/osx/osx.sh
-
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
