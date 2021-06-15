@@ -22,8 +22,6 @@
   </array>
   <key>com.apple.security.app-sandbox</key>
   <true/>
-  <key>LSMinimumSystemVersion</key>
-  <string>10.4.1</string>
   <key>CFBundleIconName</key>
   <string>AppIcon</string>
 </dict>
