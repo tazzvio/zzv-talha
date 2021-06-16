@@ -23,7 +23,7 @@
   <key>com.apple.security.app-sandbox</key>
   <true/>
   <key>CFBundleIconName</key>
-  <string>AppIcon</string>
+  <string>Assets.xcassets/AppIcon.appiconset</string>
   <key>LSMinimumSystemVersion</key>
   <string>11.2.1</string>
   <key>XSAppIconAssets</key>
