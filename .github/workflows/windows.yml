@@ -10,33 +10,32 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
+      # - name: Add msbuild to PATH
+      #   uses: microsoft/setup-msbuild@v1.0.2
 
-      - name: Visual Studio shell
-        uses: egor-tensin/vs-shell@v1
+      # - name: Visual Studio shell
+      #   uses: egor-tensin/vs-shell@v1
 
-      - name: Setup Gluon's GraalVM
-        uses: gluonhq/setup-graalvm@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Setup Gluon's GraalVM
+      #   uses: gluonhq/setup-graalvm@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Make staging directory
-        run: mkdir staging
+      # - name: Make staging directory
+      #   run: mkdir staging
 
-      - name: Gluon License
-        uses: gluonhq/gluon-build-license@v1
-        with:
-          gluon-license: ${{ secrets.GLUON_LICENSE }}
+      # - name: Gluon Build
+      #   run: mvn -Pdesktop client:build client:package
 
-      - name: Gluon Build
-        run: mvn -Pdesktop client:build client:package
+      - name: Build Package
+        run: src/win/build.ps1
+        shell: powershell
 
-      - name: Copy native client to staging
-        run: cp -r target/client/x86_64-windows/Zzv-view.exe staging
+      # - name: Copy native client to staging
+      #   run: cp -r target/client/x86_64-windows/Zzv-view.exe staging
 
-      - name: Upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: Package
-          path: staging
+      # - name: Upload
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Package
+      #     path: staging
