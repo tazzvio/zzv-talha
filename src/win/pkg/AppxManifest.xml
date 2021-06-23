@@ -25,7 +25,7 @@
   </Resources>
 
   <Applications>
-    <Application Id="ZZV" Executable="Resistor Calculator.exe" EntryPoint="App.App">
+    <Application Id="ZZV" Executable="Zzv-view.exe" EntryPoint="App.App">
       <uap:VisualElements DisplayName="ZZV-View application"
                       Description="ZZV package!"
                       BackgroundColor="#AA00AA"

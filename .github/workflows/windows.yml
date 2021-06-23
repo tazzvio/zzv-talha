@@ -10,19 +10,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Add msbuild to PATH
-      #   uses: microsoft/setup-msbuild@v1.0.2
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
 
-      # - name: Visual Studio shell
-      #   uses: egor-tensin/vs-shell@v1
+      - name: Visual Studio shell
+        uses: egor-tensin/vs-shell@v1
 
-      # - name: Setup Gluon's GraalVM
-      #   uses: gluonhq/setup-graalvm@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Gluon's GraalVM
+        uses: gluonhq/setup-graalvm@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Gluon Build
-      #   run: mvn -Pdesktop client:build client:package
+      - name: Gluon Build
+        run: mvn -Pdesktop client:build client:package
 
       - name: Build Package
         run: src/win/build.ps1
