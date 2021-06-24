@@ -10,14 +10,14 @@
   <Identity Name="htu.zzv-view"
             ProcessorArchitecture="x64"
             Publisher="CN=9D4E771A-DF08-4723-BF84-14412311A5B3"
-            Version="1.0.0.0"
+            Version="VersionPlaceholder"
   />
 
   <Properties>
     <DisplayName>Zzv-view</DisplayName>
     <Description>ZZV-View application</Description>
     <Logo>AppTile.png</Logo>
-    <PublisherDisplayName>Htu</PublisherDisplayName>
+    <PublisherDisplayName>Hash Token United</PublisherDisplayName>
   </Properties>
 
   <Resources>
