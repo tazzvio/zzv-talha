@@ -21,6 +21,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Graal Version 
+        run: java -version
+        shell: powershell
+
       - name: Gluon Build
         run: mvn -Pdesktop client:build client:package
 
