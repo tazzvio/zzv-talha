@@ -53,4 +53,4 @@ jobs:
           packageName: io.zzv.view
           releaseFiles: target/client/aarch64-android/gvm/Zzv-view.apk
           # releaseFiles: src/android/Zzv-view.apk
-          track: beta
+          track: alpha
