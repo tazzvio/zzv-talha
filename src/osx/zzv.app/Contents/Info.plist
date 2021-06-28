@@ -3,7 +3,7 @@
 <plist version="1.1">
 <dict>
   <key>CFBundleIdentifier</key>
-  <string>io.zzv.app</string>
+  <string>io.zzv.view</string>
   <key>CFBundleVersion</key>
   <string>CFBundleVersionPlaceHolder</string>
   <key>CFBundleShortVersionString</key>
