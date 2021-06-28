@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class view extends MobileApplication {
+public class app extends MobileApplication {
 
     public static final String PRIMARY_VIEW = HOME_VIEW;
     public static final String SECONDARY_VIEW = "LEDResistorCalculator";
@@ -27,9 +27,9 @@ public class view extends MobileApplication {
     public void postInit(Scene scene) {
         Swatch.BLUE.assignTo(scene);
         scene.getStylesheets()
-                .add(view.class.getResource("style.css").toExternalForm());
+                .add(app.class.getResource("style.css").toExternalForm());
         ((Stage) scene.getWindow()).getIcons()
-                .add(new Image(view.class.getResourceAsStream("icon.png")));
+                .add(new Image(app.class.getResourceAsStream("icon.png")));
     }
 
     public static void main(String args[]) {

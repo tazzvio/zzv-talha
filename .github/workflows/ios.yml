@@ -22,7 +22,7 @@ jobs:
 
       - uses: Apple-Actions/download-provisioning-profiles@v1
         with:
-          bundle-id: io.zzv.view
+          bundle-id: io.zzv.app
           issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}

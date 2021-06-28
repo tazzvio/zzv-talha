@@ -19,7 +19,7 @@
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.5</javafx.maven.plugin.version>
         <client.maven.plugin.version>0.1.41</client.maven.plugin.version>
-        <main.class>io.zzv.view</main.class>
+        <main.class>io.zzv.app</main.class>
     </properties>
 
     <dependencies>
