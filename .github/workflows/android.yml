@@ -52,5 +52,4 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.GLUON_ANDROID_SERVICE_ACCOUNT_JSON }}
           packageName: io.zzv.view
           releaseFiles: target/client/aarch64-android/gvm/Zzv-view.apk
-          # releaseFiles: src/android/Zzv-view.apk
           track: alpha

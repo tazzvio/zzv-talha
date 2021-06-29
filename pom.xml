@@ -110,8 +110,8 @@
                     <mainClass>${main.class}</mainClass>
                     <releaseConfiguration>
                         <!-- for iOS -->
-			<bundleVersion>${env.GITHUB_RUN_NUMBER}</bundleVersion>
-			<!-- for Android -->
+			            <bundleVersion>${env.GITHUB_RUN_NUMBER}</bundleVersion>
+			            <!-- for Android -->
                         <versionCode>${env.GITHUB_RUN_NUMBER}</versionCode>
                         <providedKeyStorePath>${env.GLUON_ANDROID_KEYSTOREPATH}</providedKeyStorePath>
                         <providedKeyStorePassword>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</providedKeyStorePassword>

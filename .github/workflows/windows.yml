@@ -30,7 +30,17 @@ jobs:
       - name: Gluon Build
         run: mvn -Pdesktop client:build client:package
 
+      - name: Setup Windows Cert
+        id: windows_cert_file
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileName: 'cert.pfx'
+          encodedString: ${{ secrets.GLUON_WINDOWS_CERT_BASE64 }}
+
       - name: Build Package
+        env: 
+          CERT_FILE: ${{ steps.windows_cert_file.outputs.filePath }}
+          CERT_PASSWORD: ${{ secrets.GLUON_WINDOWS_CERT_PASSWORD }}
         run: src/win/build.ps1
         shell: powershell
 

@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Setup Gluon's GraalVM
-      #   uses: gluonhq/setup-graalvm@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Gluon's GraalVM
+        uses: gluonhq/setup-graalvm@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Gluon Build
-      #   run: mvn -Pdesktop client:build client:package
+      - name: Gluon Build
+        run: mvn -Pdesktop client:build client:package
 
       - name: Import MACOS_APP_CERT
         uses: Apple-Actions/import-codesign-certs@v1
@@ -24,12 +24,11 @@ jobs:
           keychain: MACOS_APP_CERT_KEYCHAIN
           p12-file-base64: ${{ secrets.GLUON_MACOS_APP_CERT_FILE_BASE64 }}
           p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
-      
+
       - name: Codesign
         env:
           APP_CERT_NAME: ${{ secrets.GLUON_MACOS_APP_CERT_NAME }}
         run: bash -x src/osx/codesign.sh
-          
 
       - name: Import MACOS_INSTALLER_CERT
         uses: Apple-Actions/import-codesign-certs@v1
@@ -38,13 +37,26 @@ jobs:
           p12-file-base64: ${{ secrets.GLUON_MACOS_INSTALLER_CERT_FILE_BASE64 }}
           p12-password: ${{ secrets.GLUON_MACOS_CERTIFICATES_PASSWORD }}
 
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
-
-      - name: Upload to Mac store
+      - name: Build zzv.pkg
         env: 
           PRIV_KEY: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
           INSTALLER_CERT_NAME: ${{ secrets.GLUON_MACOS_INSTALLER_CERT_NAME }}
+        run: bash -x src/osx/osx.sh
+
+      - name: Make staging directory
+        run: mkdir staging
+
+      - name: Copy native clients to staging
+        run: cp -r src/osx/zzv.pkg staging
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: staging
+
+      - name: Upload to Mac store
+        env: 
           APPSTORE_KEY_ID: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
           APPSTORE_ISSUER_ID: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
-        run: bash -x src/osx/osx.sh
+        run: bash -x src/osx/upload.sh
