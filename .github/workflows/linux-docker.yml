@@ -28,7 +28,6 @@ jobs:
       - name: Copy native app to zzv-apt-package
         run: |
           mkdir -p src/linux/zzv_1.0.1_amd64/usr/local/bin/;
-          cp target/client/x86_64-linux/Zzv-view src/linux/zzv_1.0.1_amd64/usr/local/bin/zzv-view
 
       - name: Build apt-repository
         run: cd src/linux && bash gpg.sh && bash package.sh
