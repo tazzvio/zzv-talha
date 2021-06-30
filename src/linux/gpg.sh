@@ -1,5 +1,8 @@
 #!/bin/bash
 mkdir -p ~/.gnupg
+chown -R $(whoami) ~/.gnupg/
+chmod 600 ~/.gnupg/*
+chmod 700 ~/.gnupg
 echo "cert-digest-algo SHA256" >> ~/.gnupg/gpg.conf
 echo "digest-algo SHA256" >> ~/.gnupg/gpg.conf
 
