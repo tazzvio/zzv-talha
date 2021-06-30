@@ -18,8 +18,6 @@ jobs:
       - name: Install libraries
         run: sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
 
-      - name: Make staging directory
-        run: mkdir staging
 
       - name: Enable SWRendering
         run: cp src/linux-docker/pom.xml pom.xml
@@ -27,8 +25,14 @@ jobs:
       - name: Gluon Build
         run: mvn -Pdesktop client:build client:package
 
-      - name: Copy native client to staging
-        run: cp -r target/client/x86_64-linux/Zzv-view* staging
+      - name: Copy native app to zzv-apt-package
+        run: cp target/client/x86_64-linux/Zzv-view src/linux/zzv_1.0.1_amd64/usr/local/bin/zzv-view        
+
+      - name: Build apt-repository
+        run: cd src/linux && bash gpg.sh && bash package.sh
+
+      - name: Copy apt repo to staging
+        run: cp -r src/linux/zzv-view-apt-repo.zip staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
