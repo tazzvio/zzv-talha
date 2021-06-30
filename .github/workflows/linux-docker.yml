@@ -30,9 +30,9 @@ jobs:
           mkdir -p src/linux/zzv_1.0.1_amd64/usr/local/bin/;
 
       - name: Build apt-repository
-        env: 
-          GPG_PASS: {{ secrets.GPG_PASS }}
         run: cd src/linux && bash gpg.sh && bash package.sh
+        env: 
+          GPG_PASS: ${{ secrets.GPG_PASS }}
 
       - name: Copy apt repo to staging
         run: cp -r src/linux/zzv-view-apt-repo.zip staging
