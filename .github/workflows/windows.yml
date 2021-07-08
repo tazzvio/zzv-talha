@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: [self-hosted, Windows, X64]
     steps:
       - uses: actions/checkout@v2
 
@@ -22,10 +22,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           graalvm: '21.1.0-dev-20210415_0700'
-
-      - name: Graal Version 
-        run: java -version
-        shell: powershell
 
       - name: Gluon Build
         run: mvn -Pdesktop client:build client:package
